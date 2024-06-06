@@ -1,0 +1,14 @@
+/**/
+.fundo{
+    background-color: gray;
+    text-align: center;
+    boeder: 2px solid black;
+    border-radius: 20px;
+}
+
+label{
+    font-size: 29px;
+    text-align: left;
+}
+
+
