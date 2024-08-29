@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+<head lang="pt-br">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Security-Policy" content="default-src * data: gap: content: https://ssl.gstatic.com; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+    <!--<script src="cordova.js"></script>
+    <script src="components/loader.js"></script>
+    <link rel="stylesheet" href="components/loader.css">
+    <link rel="stylesheet" href="css/style.css">-->
+    <link rel="stylesheet">
+    <script>
+    </script>
+</head>
+<body>
+    <div style="position: absolute; width: 100px; height: 100px;">
+        <div id="personagens" style="
+        display: block;
+        flex-wrap: wrap; 
+        justify-content: space-between;
+        position: absolute;
+        size: 30px;
+        justify-content: center;
+        background-color: red;
+        color: white;
+        text-align: center;
+        ">
+        </div>
+    </div>
+
+</body>
+<script>
+        
+        const timeShamp = Math.floor(Date.now()/1000);
+        const apikey = "f980399c4ce89522ea6ab78c18db1ae6";
+        const md5 = "fdf10f44fb1847f3bccf0ace31e78994";
+        const offset = `offset=${Math.round(Math.random() * 100)}&`;
+
+        fetch("https://gateway.marvel.com:443/v1/public/characters?limit=10&" + offset +"ts=1670913383902&apikey=edc9531ea872c74a2855ed93a5903229&hash=bbb581dcf34e4752243b361daa960fb1"
+        ).then((response) =>
+            {
+                return response.json();
+            }
+        ).then((jsonParsed) =>
+            {
+                 console.log(jsonParsed);
+                const Personagens = document.querySelector('#personagens');
+                jsonParsed.data.results.forEach(element => 
+                {
+                    const srcImage = element.thumbnail.path + "." + element.thumbnail.extension;
+                    const nomePersonagens = element.name;
+
+                    criarDivPersonagens(srcImage, nomePersonagens, Personagens)
+                });
+                console.log(jsonParsed);
+            })
+
+            function criarDivPersonagens(srcImage, nomePersonagens, divToAppend){
+                const divPai = document.createElement('div');
+                const divFilho = document.createElement('div');
+                const textName = document.createElement('text');
+                const Img = document.createElement('img');
+
+                textName.textContent = nomePersonagens;
+                Img.src = srcImage;
+
+                divFilho.appendChild(Img);
+                divFilho.appendChild(textName);
+                divPai.appendChild(divFilho);
+                divToAppend.appendChild(divPai);
+         }
+
+    </script>
+
+</html>
